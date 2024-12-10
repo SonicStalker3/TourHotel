@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище HotelModelContainer" CdmEntityContainer="HotelEntities">
+    <EntitySetMapping Name="Заявки">
+      <EntityTypeMapping TypeName="HotelModel.Заявки">
+        <MappingFragment StoreEntitySet="Заявки">
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="TourID" ColumnName="TourID" />
+          <ScalarProperty Name="Предпочтения" ColumnName="Предпочтения" />
+          <ScalarProperty Name="ДополнительныеУслуги" ColumnName="ДополнительныеУслуги" />
+          <ScalarProperty Name="Статус" ColumnName="Статус" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Клиенты">
+      <EntityTypeMapping TypeName="HotelModel.Клиенты">
+        <MappingFragment StoreEntitySet="Клиенты">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Отели">
+      <EntityTypeMapping TypeName="HotelModel.Отели">
+        <MappingFragment StoreEntitySet="Отели">
+          <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+          <ScalarProperty Name="Название" ColumnName="Название" />
+          <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+          <ScalarProperty Name="Рейтинг" ColumnName="Рейтинг" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Отзывы">
+      <EntityTypeMapping TypeName="HotelModel.Отзывы">
+        <MappingFragment StoreEntitySet="Отзывы">
+          <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+          <ScalarProperty Name="Оценка" ColumnName="Оценка" />
+          <ScalarProperty Name="Текст" ColumnName="Текст" />
+          <ScalarProperty Name="ДатаСоздания" ColumnName="ДатаСоздания" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Пользователи">
+      <EntityTypeMapping TypeName="HotelModel.Пользователи">
+        <MappingFragment StoreEntitySet="Пользователи">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ИмяПользователя" ColumnName="ИмяПользователя" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="Роль" ColumnName="Роль" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Страны">
+      <EntityTypeMapping TypeName="HotelModel.Страны">
+        <MappingFragment StoreEntitySet="Страны">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="ИмяСтраны" ColumnName="ИмяСтраны" />
+          <ScalarProperty Name="Код" ColumnName="Код" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Туры">
+      <EntityTypeMapping TypeName="HotelModel.Туры">
+        <MappingFragment StoreEntitySet="Туры">
+          <ScalarProperty Name="TourID" ColumnName="TourID" />
+          <ScalarProperty Name="Название" ColumnName="Название" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+          <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+          <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
+          <ScalarProperty Name="Цена" ColumnName="Цена" />
+          <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
