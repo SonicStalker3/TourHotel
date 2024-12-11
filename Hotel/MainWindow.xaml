@@ -11,15 +11,15 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
         <!--<DockPanel Grid.Row="0" VerticalAlignment="Top">
             <Menu/>
         </DockPanel>-->
         <Grid Background="Aqua" Grid.Row="1">
-            <Image/>
+            <Image HorizontalAlignment="Left" Source="/Travel Logo.jpg"/>
             <Label HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock FontSize="20">Head</TextBlock>
+                <TextBlock FontSize="20">Tour Company: Testing in test</TextBlock>
             </Label>
         </Grid>
         <Frame Background="Gray" Grid.Row="2" Source="HotelPage.xaml"></Frame>

@@ -1,3 +1,5 @@
 .vs
 packages
 Hotel/obj
+/bin/Debug
+/obj/Debug
