@@ -36,7 +36,6 @@ namespace HotelApp
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
             var selectedHotel = (sender as Button).DataContext as Отель;
-            MessageBox.Show(selectedHotel.Название);
             NavigationService.Navigate(new AddEditPage(selectedHotel));
         }
 

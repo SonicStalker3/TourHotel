@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hotel
+namespace HotelApp
 {
     /// <summary>
     /// Логика взаимодействия для LoginPage.xaml

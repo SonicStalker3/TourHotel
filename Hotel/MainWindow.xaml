@@ -22,7 +22,7 @@
                 <TextBlock FontSize="20">Tour Company: Testing in test</TextBlock>
             </Label>
         </Grid>
-        <Frame Background="Gray" Grid.Row="2" Source="HotelPage.xaml"></Frame>
+        <Frame Background="Gray" Grid.Row="2" Source="LoginPage.xaml"></Frame>
         <Grid Background="Blue" Grid.Row="3"></Grid>
     </Grid>
 </Window>

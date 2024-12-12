@@ -39,7 +39,11 @@ namespace HotelApp
 
         public AddEditPage(Отель hotel) : base() 
         {
-            currentHotel = hotel;
+            if (hotel != null)
+            {
+                currentHotel = hotel;
+                MessageBox.Show(hotel.Название);
+            }
         }
     }
 }

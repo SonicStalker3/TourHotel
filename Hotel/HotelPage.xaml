@@ -22,8 +22,8 @@
           Grid.Row="0"
           IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название отеля" Binding="{Binding HotelName}"/>
-                <DataGridTextColumn Header="Количество звёзд" Binding="{Binding StarCount}"/>
+                <DataGridTextColumn Header="Название отеля" Binding="{Binding Название}"/>
+                <DataGridTextColumn Header="Количество звёзд" Binding="{Binding Рейтинг}"/>
                 <DataGridTemplateColumn Header=" ">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
