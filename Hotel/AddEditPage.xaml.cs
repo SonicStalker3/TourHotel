@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hotel;
 
 namespace HotelApp
 {
@@ -20,9 +21,25 @@ namespace HotelApp
     /// </summary>
     public partial class AddEditPage : Page
     {
+        private Отель currentHotel = new Отель();
+        private int star;
+
+        public int Star
+        {
+            get => star;
+            set
+            {
+                star = Math.Min(Math.Max(value, 0), 5);
+            }
+        }
         public AddEditPage()
         {
             InitializeComponent();
+        }
+
+        public AddEditPage(Отель hotel) : base() 
+        {
+            currentHotel = hotel;
         }
     }
 }

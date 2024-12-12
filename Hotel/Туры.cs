@@ -23,13 +23,20 @@ namespace Hotel
         public int TourID { get; set; }
         public string Название { get; set; }
         public string Описание { get; set; }
-        public System.DateTime ДатаНачала { get; set; }
-        public System.DateTime ДатаОкончания { get; set; }
+        public byte[] Изображение { get; set; }
+        public Nullable<bool> Актуален { get; set; }
+        public Nullable<System.DateTime> ДатаНачала { get; set; }
+        public Nullable<System.DateTime> ДатаОкончания { get; set; }
         public decimal Цена { get; set; }
-        public int HotelID { get; set; }
+        public Nullable<int> HotelID { get; set; }
+        public Nullable<int> CountryID { get; set; }
+        public Nullable<int> TourTypesID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Заявки> Заявки { get; set; }
-        public virtual Отели Отели { get; set; }
+        public virtual Отель Отель { get; set; }
+        public virtual Страны Страны { get; set; }
+        public virtual ТипыТуров ТипыТуров { get; set; }
+        public virtual Туры_ТипыТуров Туры_ТипыТуров { get; set; }
     }
 }

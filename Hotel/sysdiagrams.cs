@@ -12,16 +12,12 @@ namespace Hotel
     using System;
     using System.Collections.Generic;
     
-    public partial class Отзывы
+    public partial class sysdiagrams
     {
-        public int ReviewID { get; set; }
-        public int ClientID { get; set; }
-        public int HotelID { get; set; }
-        public int Оценка { get; set; }
-        public string Текст { get; set; }
-        public System.DateTime ДатаСоздания { get; set; }
-    
-        public virtual Клиенты Клиенты { get; set; }
-        public virtual Отель Отель { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

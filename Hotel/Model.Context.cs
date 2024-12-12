@@ -25,22 +25,26 @@ namespace Hotel
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public static HotelEntities GetContext() 
+        public static HotelEntities GetContext()
         {
-            if(_context == null) 
+            if (_context == null)
             {
                 _context = new HotelEntities();
             }
             return _context;
         }
-    
+
+
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Заявки> Заявки { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
-        public virtual DbSet<Отели> Отели { get; set; }
+        public virtual DbSet<Отель> Отель { get; set; }
         public virtual DbSet<Отзывы> Отзывы { get; set; }
         public virtual DbSet<Пользователи> Пользователи { get; set; }
+        public virtual DbSet<Роли> Роли { get; set; }
         public virtual DbSet<Страны> Страны { get; set; }
+        public virtual DbSet<ТипыТуров> ТипыТуров { get; set; }
         public virtual DbSet<Туры> Туры { get; set; }
+        public virtual DbSet<Туры_ТипыТуров> Туры_ТипыТуров { get; set; }
     }
 }

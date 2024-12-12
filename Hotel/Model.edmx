@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Хранилище HotelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Заявки">
           <Key>
             <PropertyRef Name="RequestID" />
@@ -23,13 +33,13 @@
           <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Отели">
+        <EntityType Name="Отель">
           <Key>
             <PropertyRef Name="HotelID" />
           </Key>
           <Property Name="HotelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Название" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Адрес" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Рейтинг" Type="int" />
           <Property Name="CountryID" Type="int" Nullable="false" />
         </EntityType>
@@ -51,30 +61,57 @@
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ИмяПользователя" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Пароль" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Роль" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Роли">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Страны">
           <Key>
             <PropertyRef Name="CountryID" />
           </Key>
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ИмяСтраны" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Код" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ИмяСтраны" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Код" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ТипыТуров">
+          <Key>
+            <PropertyRef Name="TourTypeID" />
+          </Key>
+          <Property Name="TourTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="Туры">
           <Key>
             <PropertyRef Name="TourID" />
           </Key>
           <Property Name="TourID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Название" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Описание" Type="text" />
-          <Property Name="ДатаНачала" Type="date" Nullable="false" />
-          <Property Name="ДатаОкончания" Type="date" Nullable="false" />
+          <Property Name="Изображение" Type="varbinary(max)" />
+          <Property Name="Актуален" Type="bit" />
+          <Property Name="ДатаНачала" Type="date" />
+          <Property Name="ДатаОкончания" Type="date" />
           <Property Name="Цена" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="HotelID" Type="int" Nullable="false" />
+          <Property Name="HotelID" Type="int" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="TourTypesID" Type="int" />
         </EntityType>
-        <Association Name="FK__Заявки__ClientID__31EC6D26">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Hotel.dbo.Туры_ТипыТуров" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Туры_ТипыТуров">
+          <Key>
+            <PropertyRef Name="TourID" />
+          </Key>
+          <Property Name="TourID" Type="int" Nullable="false" />
+          <Property Name="TourTypeID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Заявки__ClientID__45F365D3">
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
           <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +135,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Клиенты__UserID__2F10007B">
+        <Association Name="FK__Клиенты__UserID__47DBAE45">
           <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,17 +149,17 @@
         </Association>
         <Association Name="FK__Отели__CountryID__29572725">
           <End Role="Страны" Type="Self.Страны" Multiplicity="1" />
-          <End Role="Отели" Type="Self.Отели" Multiplicity="*" />
+          <End Role="Отель" Type="Self.Отель" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Страны">
               <PropertyRef Name="CountryID" />
             </Principal>
-            <Dependent Role="Отели">
+            <Dependent Role="Отель">
               <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Отзывы__ClientID__36B12243">
+        <Association Name="FK__Отзывы__ClientID__49C3F6B7">
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
           <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="*" />
           <ReferentialConstraint>
@@ -134,11 +171,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Отзывы__HotelID__37A5467C">
-          <End Role="Отели" Type="Self.Отели" Multiplicity="1" />
+        <Association Name="FK__Отзывы__HotelID__4AB81AF0">
+          <End Role="Отель" Type="Self.Отель" Multiplicity="1" />
           <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Отели">
+            <Principal Role="Отель">
               <PropertyRef Name="HotelID" />
             </Principal>
             <Dependent Role="Отзывы">
@@ -147,10 +184,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Туры__HotelID__2C3393D0">
-          <End Role="Отели" Type="Self.Отели" Multiplicity="1" />
+          <End Role="Отель" Type="Self.Отель" Multiplicity="0..1" />
           <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Отели">
+            <Principal Role="Отель">
               <PropertyRef Name="HotelID" />
             </Principal>
             <Dependent Role="Туры">
@@ -158,15 +195,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Туры_Страны">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров">
+          <End Role="ТипыТуров" Type="Self.ТипыТуров" Multiplicity="0..1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="TourTypesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров_ТипыТуров">
+          <End Role="ТипыТуров" Type="Self.ТипыТуров" Multiplicity="0..1" />
+          <End Role="Туры_ТипыТуров" Type="Self.Туры_ТипыТуров" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Principal>
+            <Dependent Role="Туры_ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров_Туры">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Туры_ТипыТуров" Type="Self.Туры_ТипыТуров" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourID" />
+            </Principal>
+            <Dependent Role="Туры_ТипыТуров">
+              <PropertyRef Name="TourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище HotelModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Заявки" EntityType="Self.Заявки" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Отели" EntityType="Self.Отели" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отель" EntityType="Self.Отель" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Отзывы" EntityType="Self.Отзывы" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Страны" EntityType="Self.Страны" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТипыТуров" EntityType="Self.ТипыТуров" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Туры" EntityType="Self.Туры" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Заявки__ClientID__31EC6D26" Association="Self.FK__Заявки__ClientID__31EC6D26">
+          <EntitySet Name="Туры_ТипыТуров" EntityType="Self.Туры_ТипыТуров" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Туры_ТипыТуров].[TourID] AS [TourID], 
+    [Туры_ТипыТуров].[TourTypeID] AS [TourTypeID]
+    FROM [dbo].[Туры_ТипыТуров] AS [Туры_ТипыТуров]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Заявки__ClientID__45F365D3" Association="Self.FK__Заявки__ClientID__45F365D3">
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="Заявки" EntitySet="Заявки" />
           </AssociationSet>
@@ -174,25 +268,41 @@
             <End Role="Туры" EntitySet="Туры" />
             <End Role="Заявки" EntitySet="Заявки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Клиенты__UserID__2F10007B" Association="Self.FK__Клиенты__UserID__2F10007B">
+          <AssociationSet Name="FK__Клиенты__UserID__47DBAE45" Association="Self.FK__Клиенты__UserID__47DBAE45">
             <End Role="Пользователи" EntitySet="Пользователи" />
             <End Role="Клиенты" EntitySet="Клиенты" />
           </AssociationSet>
           <AssociationSet Name="FK__Отели__CountryID__29572725" Association="Self.FK__Отели__CountryID__29572725">
             <End Role="Страны" EntitySet="Страны" />
-            <End Role="Отели" EntitySet="Отели" />
+            <End Role="Отель" EntitySet="Отель" />
           </AssociationSet>
-          <AssociationSet Name="FK__Отзывы__ClientID__36B12243" Association="Self.FK__Отзывы__ClientID__36B12243">
+          <AssociationSet Name="FK__Отзывы__ClientID__49C3F6B7" Association="Self.FK__Отзывы__ClientID__49C3F6B7">
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="Отзывы" EntitySet="Отзывы" />
           </AssociationSet>
-          <AssociationSet Name="FK__Отзывы__HotelID__37A5467C" Association="Self.FK__Отзывы__HotelID__37A5467C">
-            <End Role="Отели" EntitySet="Отели" />
+          <AssociationSet Name="FK__Отзывы__HotelID__4AB81AF0" Association="Self.FK__Отзывы__HotelID__4AB81AF0">
+            <End Role="Отель" EntitySet="Отель" />
             <End Role="Отзывы" EntitySet="Отзывы" />
           </AssociationSet>
           <AssociationSet Name="FK__Туры__HotelID__2C3393D0" Association="Self.FK__Туры__HotelID__2C3393D0">
-            <End Role="Отели" EntitySet="Отели" />
+            <End Role="Отель" EntitySet="Отель" />
             <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_Страны" Association="Self.FK_Туры_Страны">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров" Association="Self.FK_Туры_ТипыТуров">
+            <End Role="ТипыТуров" EntitySet="ТипыТуров" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров_ТипыТуров" Association="Self.FK_Туры_ТипыТуров_ТипыТуров">
+            <End Role="ТипыТуров" EntitySet="ТипыТуров" />
+            <End Role="Туры_ТипыТуров" EntitySet="Туры_ТипыТуров" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров_Туры" Association="Self.FK_Туры_ТипыТуров_Туры">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Туры_ТипыТуров" EntitySet="Туры_ТипыТуров" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -200,6 +310,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Заявки">
           <Key>
             <PropertyRef Name="RequestID" />
@@ -210,7 +330,7 @@
           <Property Name="Предпочтения" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ДополнительныеУслуги" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Заявки__ClientID__31EC6D26" FromRole="Заявки" ToRole="Клиенты" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Заявки__ClientID__45F365D3" FromRole="Заявки" ToRole="Клиенты" />
           <NavigationProperty Name="Туры" Relationship="Self.FK__Заявки__TourID__32E0915F" FromRole="Заявки" ToRole="Туры" />
         </EntityType>
         <EntityType Name="Клиенты">
@@ -219,22 +339,22 @@
           </Key>
           <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Заявки" Relationship="Self.FK__Заявки__ClientID__31EC6D26" FromRole="Клиенты" ToRole="Заявки" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Клиенты__UserID__2F10007B" FromRole="Клиенты" ToRole="Пользователи" />
-          <NavigationProperty Name="Отзывы" Relationship="Self.FK__Отзывы__ClientID__36B12243" FromRole="Клиенты" ToRole="Отзывы" />
+          <NavigationProperty Name="Заявки" Relationship="Self.FK__Заявки__ClientID__45F365D3" FromRole="Клиенты" ToRole="Заявки" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Клиенты__UserID__47DBAE45" FromRole="Клиенты" ToRole="Пользователи" />
+          <NavigationProperty Name="Отзывы" Relationship="Self.FK__Отзывы__ClientID__49C3F6B7" FromRole="Клиенты" ToRole="Отзывы" />
         </EntityType>
-        <EntityType Name="Отели">
+        <EntityType Name="Отель">
           <Key>
             <PropertyRef Name="HotelID" />
           </Key>
           <Property Name="HotelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Адрес" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Рейтинг" Type="Int32" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Страны" Relationship="Self.FK__Отели__CountryID__29572725" FromRole="Отели" ToRole="Страны" />
-          <NavigationProperty Name="Отзывы" Relationship="Self.FK__Отзывы__HotelID__37A5467C" FromRole="Отели" ToRole="Отзывы" />
-          <NavigationProperty Name="Туры" Relationship="Self.FK__Туры__HotelID__2C3393D0" FromRole="Отели" ToRole="Туры" />
+          <NavigationProperty Name="Страны" Relationship="Self.FK__Отели__CountryID__29572725" FromRole="Отель" ToRole="Страны" />
+          <NavigationProperty Name="Отзывы" Relationship="Self.FK__Отзывы__HotelID__4AB81AF0" FromRole="Отель" ToRole="Отзывы" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Туры__HotelID__2C3393D0" FromRole="Отель" ToRole="Туры" />
         </EntityType>
         <EntityType Name="Отзывы">
           <Key>
@@ -246,8 +366,8 @@
           <Property Name="Оценка" Type="Int32" Nullable="false" />
           <Property Name="Текст" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ДатаСоздания" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Отзывы__ClientID__36B12243" FromRole="Отзывы" ToRole="Клиенты" />
-          <NavigationProperty Name="Отели" Relationship="Self.FK__Отзывы__HotelID__37A5467C" FromRole="Отзывы" ToRole="Отели" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Отзывы__ClientID__49C3F6B7" FromRole="Отзывы" ToRole="Клиенты" />
+          <NavigationProperty Name="Отель" Relationship="Self.FK__Отзывы__HotelID__4AB81AF0" FromRole="Отзывы" ToRole="Отель" />
         </EntityType>
         <EntityType Name="Пользователи">
           <Key>
@@ -256,34 +376,67 @@
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ИмяПользователя" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Пароль" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Роль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Клиенты__UserID__2F10007B" FromRole="Пользователи" ToRole="Клиенты" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.FK__Клиенты__UserID__47DBAE45" FromRole="Пользователи" ToRole="Клиенты" />
+        </EntityType>
+        <EntityType Name="Роли">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Страны">
           <Key>
             <PropertyRef Name="CountryID" />
           </Key>
           <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ИмяСтраны" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Код" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Отели" Relationship="Self.FK__Отели__CountryID__29572725" FromRole="Страны" ToRole="Отели" />
+          <Property Name="ИмяСтраны" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Отель" Relationship="Self.FK__Отели__CountryID__29572725" FromRole="Страны" ToRole="Отель" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK_Туры_Страны" FromRole="Страны" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="ТипыТуров">
+          <Key>
+            <PropertyRef Name="TourTypeID" />
+          </Key>
+          <Property Name="TourTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK_Туры_ТипыТуров" FromRole="ТипыТуров" ToRole="Туры" />
+          <NavigationProperty Name="Туры_ТипыТуров" Relationship="Self.FK_Туры_ТипыТуров_ТипыТуров" FromRole="ТипыТуров" ToRole="Туры_ТипыТуров" />
         </EntityType>
         <EntityType Name="Туры">
           <Key>
             <PropertyRef Name="TourID" />
           </Key>
           <Property Name="TourID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ДатаОкончания" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Актуален" Type="Boolean" />
+          <Property Name="ДатаНачала" Type="DateTime" Precision="0" />
+          <Property Name="ДатаОкончания" Type="DateTime" Precision="0" />
           <Property Name="Цена" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="HotelID" Type="Int32" Nullable="false" />
+          <Property Name="HotelID" Type="Int32" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="TourTypesID" Type="Int32" />
           <NavigationProperty Name="Заявки" Relationship="Self.FK__Заявки__TourID__32E0915F" FromRole="Туры" ToRole="Заявки" />
-          <NavigationProperty Name="Отели" Relationship="Self.FK__Туры__HotelID__2C3393D0" FromRole="Туры" ToRole="Отели" />
+          <NavigationProperty Name="Отель" Relationship="Self.FK__Туры__HotelID__2C3393D0" FromRole="Туры" ToRole="Отель" />
+          <NavigationProperty Name="Страны" Relationship="Self.FK_Туры_Страны" FromRole="Туры" ToRole="Страны" />
+          <NavigationProperty Name="ТипыТуров" Relationship="Self.FK_Туры_ТипыТуров" FromRole="Туры" ToRole="ТипыТуров" />
+          <NavigationProperty Name="Туры_ТипыТуров" Relationship="Self.FK_Туры_ТипыТуров_Туры" FromRole="Туры" ToRole="Туры_ТипыТуров" />
         </EntityType>
-        <Association Name="FK__Заявки__ClientID__31EC6D26">
+        <EntityType Name="Туры_ТипыТуров">
+          <Key>
+            <PropertyRef Name="TourID" />
+          </Key>
+          <Property Name="TourID" Type="Int32" Nullable="false" />
+          <Property Name="TourTypeID" Type="Int32" />
+          <NavigationProperty Name="ТипыТуров" Relationship="Self.FK_Туры_ТипыТуров_ТипыТуров" FromRole="Туры_ТипыТуров" ToRole="ТипыТуров" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK_Туры_ТипыТуров_Туры" FromRole="Туры_ТипыТуров" ToRole="Туры" />
+        </EntityType>
+        <Association Name="FK__Заявки__ClientID__45F365D3">
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
           <End Role="Заявки" Type="Self.Заявки" Multiplicity="*" />
           <ReferentialConstraint>
@@ -307,7 +460,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Клиенты__UserID__2F10007B">
+        <Association Name="FK__Клиенты__UserID__47DBAE45">
           <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="1" />
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="*" />
           <ReferentialConstraint>
@@ -319,7 +472,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Отзывы__ClientID__36B12243">
+        <Association Name="FK__Отзывы__ClientID__49C3F6B7">
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
           <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="*" />
           <ReferentialConstraint>
@@ -333,21 +486,21 @@
         </Association>
         <Association Name="FK__Отели__CountryID__29572725">
           <End Role="Страны" Type="Self.Страны" Multiplicity="1" />
-          <End Role="Отели" Type="Self.Отели" Multiplicity="*" />
+          <End Role="Отель" Type="Self.Отель" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Страны">
               <PropertyRef Name="CountryID" />
             </Principal>
-            <Dependent Role="Отели">
+            <Dependent Role="Отель">
               <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Отзывы__HotelID__37A5467C">
-          <End Role="Отели" Type="Self.Отели" Multiplicity="1" />
+        <Association Name="FK__Отзывы__HotelID__4AB81AF0">
+          <End Role="Отель" Type="Self.Отель" Multiplicity="1" />
           <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Отели">
+            <Principal Role="Отель">
               <PropertyRef Name="HotelID" />
             </Principal>
             <Dependent Role="Отзывы">
@@ -356,10 +509,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Туры__HotelID__2C3393D0">
-          <End Role="Отели" Type="Self.Отели" Multiplicity="1" />
+          <End Role="Отель" Type="Self.Отель" Multiplicity="0..1" />
           <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Отели">
+            <Principal Role="Отель">
               <PropertyRef Name="HotelID" />
             </Principal>
             <Dependent Role="Туры">
@@ -367,15 +520,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Туры_Страны">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров">
+          <End Role="ТипыТуров" Type="Self.ТипыТуров" Multiplicity="0..1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="TourTypesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров_ТипыТуров">
+          <End Role="ТипыТуров" Type="Self.ТипыТуров" Multiplicity="0..1" />
+          <End Role="Туры_ТипыТуров" Type="Self.Туры_ТипыТуров" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Principal>
+            <Dependent Role="Туры_ТипыТуров">
+              <PropertyRef Name="TourTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Туры_ТипыТуров_Туры">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Туры_ТипыТуров" Type="Self.Туры_ТипыТуров" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourID" />
+            </Principal>
+            <Dependent Role="Туры_ТипыТуров">
+              <PropertyRef Name="TourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Заявки" EntityType="Self.Заявки" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
-          <EntitySet Name="Отели" EntityType="Self.Отели" />
+          <EntitySet Name="Отель" EntityType="Self.Отель" />
           <EntitySet Name="Отзывы" EntityType="Self.Отзывы" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+          <EntitySet Name="Роли" EntityType="Self.Роли" />
           <EntitySet Name="Страны" EntityType="Self.Страны" />
+          <EntitySet Name="ТипыТуров" EntityType="Self.ТипыТуров" />
           <EntitySet Name="Туры" EntityType="Self.Туры" />
-          <AssociationSet Name="FK__Заявки__ClientID__31EC6D26" Association="Self.FK__Заявки__ClientID__31EC6D26">
+          <EntitySet Name="Туры_ТипыТуров" EntityType="Self.Туры_ТипыТуров" />
+          <AssociationSet Name="FK__Заявки__ClientID__45F365D3" Association="Self.FK__Заявки__ClientID__45F365D3">
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="Заявки" EntitySet="Заявки" />
           </AssociationSet>
@@ -383,25 +588,41 @@
             <End Role="Туры" EntitySet="Туры" />
             <End Role="Заявки" EntitySet="Заявки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Клиенты__UserID__2F10007B" Association="Self.FK__Клиенты__UserID__2F10007B">
+          <AssociationSet Name="FK__Клиенты__UserID__47DBAE45" Association="Self.FK__Клиенты__UserID__47DBAE45">
             <End Role="Пользователи" EntitySet="Пользователи" />
             <End Role="Клиенты" EntitySet="Клиенты" />
           </AssociationSet>
-          <AssociationSet Name="FK__Отзывы__ClientID__36B12243" Association="Self.FK__Отзывы__ClientID__36B12243">
+          <AssociationSet Name="FK__Отзывы__ClientID__49C3F6B7" Association="Self.FK__Отзывы__ClientID__49C3F6B7">
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="Отзывы" EntitySet="Отзывы" />
           </AssociationSet>
           <AssociationSet Name="FK__Отели__CountryID__29572725" Association="Self.FK__Отели__CountryID__29572725">
             <End Role="Страны" EntitySet="Страны" />
-            <End Role="Отели" EntitySet="Отели" />
+            <End Role="Отель" EntitySet="Отель" />
           </AssociationSet>
-          <AssociationSet Name="FK__Отзывы__HotelID__37A5467C" Association="Self.FK__Отзывы__HotelID__37A5467C">
-            <End Role="Отели" EntitySet="Отели" />
+          <AssociationSet Name="FK__Отзывы__HotelID__4AB81AF0" Association="Self.FK__Отзывы__HotelID__4AB81AF0">
+            <End Role="Отель" EntitySet="Отель" />
             <End Role="Отзывы" EntitySet="Отзывы" />
           </AssociationSet>
           <AssociationSet Name="FK__Туры__HotelID__2C3393D0" Association="Self.FK__Туры__HotelID__2C3393D0">
-            <End Role="Отели" EntitySet="Отели" />
+            <End Role="Отель" EntitySet="Отель" />
             <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_Страны" Association="Self.FK_Туры_Страны">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров" Association="Self.FK_Туры_ТипыТуров">
+            <End Role="ТипыТуров" EntitySet="ТипыТуров" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров_ТипыТуров" Association="Self.FK_Туры_ТипыТуров_ТипыТуров">
+            <End Role="ТипыТуров" EntitySet="ТипыТуров" />
+            <End Role="Туры_ТипыТуров" EntitySet="Туры_ТипыТуров" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Туры_ТипыТуров_Туры" Association="Self.FK_Туры_ТипыТуров_Туры">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Туры_ТипыТуров" EntitySet="Туры_ТипыТуров" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -410,6 +631,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище HotelModelContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HotelModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Заявки">
             <EntityTypeMapping TypeName="HotelModel.Заявки">
               <MappingFragment StoreEntitySet="Заявки">
@@ -430,9 +662,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Отели">
-            <EntityTypeMapping TypeName="HotelModel.Отели">
-              <MappingFragment StoreEntitySet="Отели">
+          <EntitySetMapping Name="Отель">
+            <EntityTypeMapping TypeName="HotelModel.Отель">
+              <MappingFragment StoreEntitySet="Отель">
                 <ScalarProperty Name="HotelID" ColumnName="HotelID" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="Адрес" ColumnName="Адрес" />
@@ -459,8 +691,16 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ИмяПользователя" ColumnName="ИмяПользователя" />
                 <ScalarProperty Name="Пароль" ColumnName="Пароль" />
-                <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Роли">
+            <EntityTypeMapping TypeName="HotelModel.Роли">
+              <MappingFragment StoreEntitySet="Роли">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -473,16 +713,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ТипыТуров">
+            <EntityTypeMapping TypeName="HotelModel.ТипыТуров">
+              <MappingFragment StoreEntitySet="ТипыТуров">
+                <ScalarProperty Name="TourTypeID" ColumnName="TourTypeID" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Туры">
             <EntityTypeMapping TypeName="HotelModel.Туры">
               <MappingFragment StoreEntitySet="Туры">
                 <ScalarProperty Name="TourID" ColumnName="TourID" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
                 <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
+                <ScalarProperty Name="Актуален" ColumnName="Актуален" />
                 <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
                 <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
                 <ScalarProperty Name="Цена" ColumnName="Цена" />
                 <ScalarProperty Name="HotelID" ColumnName="HotelID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="TourTypesID" ColumnName="TourTypesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Туры_ТипыТуров">
+            <EntityTypeMapping TypeName="HotelModel.Туры_ТипыТуров">
+              <MappingFragment StoreEntitySet="Туры_ТипыТуров">
+                <ScalarProperty Name="TourID" ColumnName="TourID" />
+                <ScalarProperty Name="TourTypeID" ColumnName="TourTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -500,7 +760,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />

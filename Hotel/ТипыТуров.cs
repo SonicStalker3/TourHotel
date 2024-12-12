@@ -12,22 +12,21 @@ namespace Hotel
     using System;
     using System.Collections.Generic;
     
-    public partial class Страны
+    public partial class ТипыТуров
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Страны()
+        public ТипыТуров()
         {
-            this.Отель = new HashSet<Отель>();
             this.Туры = new HashSet<Туры>();
+            this.Туры_ТипыТуров = new HashSet<Туры_ТипыТуров>();
         }
     
-        public int CountryID { get; set; }
-        public string ИмяСтраны { get; set; }
-        public string Код { get; set; }
+        public int TourTypeID { get; set; }
+        public string Название { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Отель> Отель { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Туры> Туры { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Туры_ТипыТуров> Туры_ТипыТуров { get; set; }
     }
 }

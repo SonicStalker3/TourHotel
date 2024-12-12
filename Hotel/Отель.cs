@@ -12,10 +12,10 @@ namespace Hotel
     using System;
     using System.Collections.Generic;
     
-    public partial class Отели
+    public partial class Отель
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Отели()
+        public Отель()
         {
             this.Отзывы = new HashSet<Отзывы>();
             this.Туры = new HashSet<Туры>();

@@ -36,7 +36,7 @@
                 <Label Grid.Column="0">
                     <TextBlock TextWrapping="Wrap">Количество звёзд:</TextBlock>
                 </Label>
-                <TextBox x:Name="StarsField" Grid.Column="1" MinWidth="200"></TextBox>
+                <local:NumericUpDown x:Name="StarsField" MinValue="1" MaxValue="5" Grid.Column="1" MinWidth="200"></local:NumericUpDown>
             </Grid>
             <Separator Visibility="Hidden" Height="20"/>
             <Grid>
@@ -47,7 +47,7 @@
                 <Label Grid.Column="0">
                     <TextBlock TextWrapping="Wrap">Страна:</TextBlock>
                 </Label>
-                <ListBox x:Name="CountryList" Grid.Column="1" MinWidth="200"></ListBox>
+                <ComboBox x:Name="CountryList" Grid.Column="1" MinWidth="200"></ComboBox>
             </Grid>
             <Separator Visibility="Hidden" Height="20"/>
         </StackPanel>

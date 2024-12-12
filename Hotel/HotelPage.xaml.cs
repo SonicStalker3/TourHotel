@@ -24,7 +24,26 @@ namespace HotelApp
         public HotelPage()
         {
             InitializeComponent();
-            DGridHotel.ItemsSource = HotelEntities.GetContext().Отели.ToList();
+            DGridHotel.ItemsSource = HotelEntities.GetContext().Отель.ToList();
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedHotel = DGridHotel.SelectedItem as Отель;
+            NavigationService.Navigate(new AddEditPage(selectedHotel));
+        }
+
+        private void EditButtonClick(object sender, RoutedEventArgs e)
+        {
+            var selectedHotel = (sender as Button).DataContext as Отель;
+            NavigationService.Navigate(new AddEditPage(selectedHotel));
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedHotel = DGridHotel.SelectedItem as Отель;
+            HotelEntities.GetContext().Отель.Remove(selectedHotel);
+            HotelEntities.GetContext().SaveChanges();
         }
     }
 }
