@@ -27,7 +27,7 @@
                 <DataGridTemplateColumn Header=" ">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Редактировать" Command="{Binding EditCommand}"/>
+                            <Button Content="Редактировать" Command="{Binding EditCommand}" Click="EditButtonClick"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
