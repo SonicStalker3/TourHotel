@@ -24,7 +24,7 @@ namespace HotelApp
         public HotelPage()
         {
             InitializeComponent();
-            DGridHotel.ItemsSource = HotelEntities.GetContext().Отель.ToList();
+            HotelEntities.GetContext().Отель.ToList();//.Include(o => o.Страны).ToList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
