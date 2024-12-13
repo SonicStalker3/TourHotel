@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:HotelApp"
         mc:Ignorable="d"
         Title="Отель" Height="450" Width="800">
+    <Window.Resources>
+        <!--<local:BoolToYesNoConverter x:Key="BoolToYesNoConverter"/>-->
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -22,7 +25,8 @@
                 <TextBlock FontSize="20">Tour Company: Testing in test</TextBlock>
             </Label>
         </Grid>
-        <Frame Background="Gray" Grid.Row="2" Source="LoginPage.xaml"></Frame>
+        <!--<Frame Background="Gray" Grid.Row="2" Source="LoginPage.xaml"></Frame>-->
+        <Frame Background="Gray" Grid.Row="2" Source="ToursViewPage.xaml"></Frame>
         <Grid Background="Blue" Grid.Row="3"></Grid>
     </Grid>
 </Window>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hotel.Properties {
+namespace HotelApp.Properties {
     using System;
     
     
@@ -57,6 +57,16 @@ namespace Hotel.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ErrorImage {
+            get {
+                object obj = ResourceManager.GetObject("ErrorImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

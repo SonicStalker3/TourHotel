@@ -30,13 +30,13 @@ namespace HotelApp
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedHotel = DGridHotel.SelectedItem as Отель;
-            NavigationService.Navigate(new AddEditPage(null));
+            NavigationService.Navigate(new AddEditHotelsPage(null));
         }
 
         private void EditButtonClick(object sender, RoutedEventArgs e)
         {
             var selectedHotel = (sender as Button).DataContext as Отель;
-            NavigationService.Navigate(new AddEditPage(selectedHotel));
+            NavigationService.Navigate(new AddEditHotelsPage(selectedHotel));
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
