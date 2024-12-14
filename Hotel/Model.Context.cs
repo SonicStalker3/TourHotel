@@ -16,6 +16,7 @@ namespace Hotel
     public partial class HotelEntities : DbContext
     {
         private static HotelEntities _context;
+
         public HotelEntities()
             : base("name=HotelEntities")
         {
@@ -25,6 +26,7 @@ namespace Hotel
         {
             throw new UnintentionalCodeFirstException();
         }
+
         public static HotelEntities GetContext()
         {
             if (_context == null)
@@ -33,7 +35,6 @@ namespace Hotel
             }
             return _context;
         }
-
 
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Заявки> Заявки { get; set; }
