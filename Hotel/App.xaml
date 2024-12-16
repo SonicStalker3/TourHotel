@@ -4,6 +4,29 @@
              xmlns:local="clr-namespace:HotelApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="DarkBlue"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="EditButton" TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+        </Style>
     </Application.Resources>
 </Application>

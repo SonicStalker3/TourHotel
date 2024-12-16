@@ -15,8 +15,8 @@
         </Grid.RowDefinitions>
         <WrapPanel HorizontalAlignment="Center" Grid.Row="0">
             <TextBox x:Name="SearchTextBox" Width="200"/>
-            <Button Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" Click="SearchButton_Click">
-                <Image Source="/ErrorImage.jpg"></Image>
+            <Button Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" Click="SearchButton_Click" Margin="0,0,0,0">
+                <Image Source="ErrorImage.jpg"></Image>
             </Button>
         </WrapPanel>
         <ListView ItemsSource="{Binding Туры}" Grid.Row="1">
