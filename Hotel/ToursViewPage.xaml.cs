@@ -25,6 +25,7 @@ namespace HotelApp
     /// </summary>
     public partial class ToursViewPage : Page
     {
+        private ObservableCollection<Туры> _allTours;
         public ObservableCollection<Туры> Туры { get; set; }
 
         public ToursViewPage()
@@ -32,20 +33,36 @@ namespace HotelApp
             InitializeComponent();
 
             var tours = HotelEntities.GetContext().Туры.OrderBy(x => x.Название).ToList();
-            Туры = new ObservableCollection<Туры>(tours);
-
+            _allTours = new ObservableCollection<Туры>(tours);
+            Туры = new ObservableCollection<Туры>(_allTours);
             DataContext = this;
         }
 
-/*        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        /*        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+                {
+                    if (sender is System.Windows.Controls.Image image)
+                    {
+                        BitmapImage errorImage = BitmapToBitmapImage(Properties.Resources.ErrorImage);
+                        image.Source = errorImage;
+                        //image.Source = new BitmapImage(new Uri("pack://application:.../HotelApp;Resources/ErrorImage.jpg"));
+                    }
+                }*/
+
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is System.Windows.Controls.Image image)
+            var searchText = SearchTextBox.Text.ToLower(); // Получаем текст из TextBox
+            var filteredTours = _allTours
+                                .Where(t => t.Название.ToLower().Contains(searchText))
+                                .OrderBy(t => t.Название) // Сортируем по названию
+                                .ToList();
+
+            Туры.Clear(); // Очищаем текущую коллекцию
+            foreach (var tour in filteredTours)
             {
-                BitmapImage errorImage = BitmapToBitmapImage(Properties.Resources.ErrorImage);
-                image.Source = errorImage;
-                //image.Source = new BitmapImage(new Uri("pack://application:.../HotelApp;Resources/ErrorImage.jpg"));
+                Туры.Add(tour); // Добавляем отфильтрованные туры
             }
-        }*/ 
+        }
 
         private void Image_Loaded(object sender, RoutedEventArgs e)
         {

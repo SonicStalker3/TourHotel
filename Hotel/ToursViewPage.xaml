@@ -9,43 +9,52 @@
       Title="ToursViewPage">
 
     <Grid>
-        <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Туры}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="5" Margin="5" Width="225" Height="400">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <!-- Для названия -->
-                                    <RowDefinition Height="Auto"/>
-                                    <!-- Для изображения -->
-                                    <RowDefinition Height="Auto"/>
-                                    <!-- Для описания -->
-                                    <RowDefinition Height="Auto"/>
-                                    <!-- Для цены -->
-                                    <RowDefinition Height="Auto"/>
-                                    <!-- Для актуальности -->
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel HorizontalAlignment="Center" Grid.Row="0">
+            <TextBox x:Name="SearchTextBox" Width="200"/>
+            <Button Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" Click="SearchButton_Click">
+                <Image Source="/ErrorImage.jpg"></Image>
+            </Button>
+        </WrapPanel>
+        <ListView ItemsSource="{Binding Туры}" Grid.Row="1">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="5" Margin="5" Width="225" Height="400">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Для названия -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Для изображения -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Для описания -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Для цены -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Для актуальности -->
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <Image Grid.Row="1" Source="{Binding Изображение}" Loaded="Image_Loaded" Stretch="Fill" Height="200" VerticalAlignment="Top"/>
-                                <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{Binding Название}" FontWeight="Bold" FontSize="16" Margin="5" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Row="2" Text="{Binding Описание}" TextWrapping="Wrap" Margin="5" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Row="3" Text="{Binding Цена, StringFormat='Цена: {0:N2} ₽'}" FontWeight="Bold" Margin="5" VerticalAlignment="Top"/>
-                                <TextBlock Grid.Row="4" Text="{Binding Актуален}" Margin="5" VerticalAlignment="Top"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                            <Image Grid.Row="1" Source="{Binding Изображение}" Loaded="Image_Loaded" Stretch="Fill" Height="200" VerticalAlignment="Top"/>
+                            <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{Binding Название}" FontWeight="Bold" FontSize="16" Margin="5" VerticalAlignment="Top"/>
+                            <TextBlock Grid.Row="2" Text="{Binding Описание}" TextWrapping="Wrap" Margin="5" VerticalAlignment="Top"/>
+                            <TextBlock Grid.Row="3" Text="{Binding Цена, StringFormat='Цена: {0:N2} ₽'}" FontWeight="Bold" Margin="5" VerticalAlignment="Top"/>
+                            <TextBlock Grid.Row="4" Text="{Binding Актуален}" Margin="5" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
