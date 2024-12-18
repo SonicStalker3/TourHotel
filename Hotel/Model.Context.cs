@@ -18,7 +18,7 @@ namespace Hotel
         private static HotelEntities _context;
 
         public HotelEntities()
-            : base("name=HotelEntities")
+            : base("name=Hotel_altEntities")
         {
         }
     
@@ -36,7 +36,6 @@ namespace Hotel
             return _context;
         }
 
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Заявки> Заявки { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Отель> Отель { get; set; }
@@ -46,6 +45,5 @@ namespace Hotel
         public virtual DbSet<Страны> Страны { get; set; }
         public virtual DbSet<ТипыТуров> ТипыТуров { get; set; }
         public virtual DbSet<Туры> Туры { get; set; }
-        public virtual DbSet<Туры_ТипыТуров> Туры_ТипыТуров { get; set; }
     }
 }

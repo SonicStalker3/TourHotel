@@ -32,7 +32,7 @@ namespace HotelApp
             // Загрузка данных для ComboBox (отели, страны, типы туров)
             HotelList.ItemsSource = HotelEntities.GetContext().Отель.ToList();
             CountryList.ItemsSource = HotelEntities.GetContext().Страны.ToList();
-            TourTypeList.ItemsSource = HotelEntities.GetContext().ТипыТуров.ToList();
+            //TourTypeList.Items = HotelEntities.GetContext().ТипыТуров.ToList();
 
             // Установка выбранных значений для ComboBox
             if (_tour.HotelID.HasValue)
@@ -41,8 +41,8 @@ namespace HotelApp
             if (_tour.CountryID.HasValue)
                 CountryList.SelectedValue = _tour.CountryID.Value;
 
-            if (_tour.TourTypesID.HasValue)
-                TourTypeList.SelectedValue = _tour.TourTypesID.Value;
+            /*if (_tour.TourTypesID.HasValue)
+                TourTypeList.SelectedValue = _tour.TourTypesID.Value;*/
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,7 @@ namespace HotelApp
             // Установка выбранных значений для ComboBox
             _tour.HotelID = (int?)HotelList.SelectedValue;
             _tour.CountryID = (int?)CountryList.SelectedValue;
-            _tour.TourTypesID = (int?)TourTypeList.SelectedValue;
+            /*_tour.TourTypesID = (int?)TourTypeList.SelectedValue;*/
 
             if (_tour.TourID == 0) // Если это новый тур
             {

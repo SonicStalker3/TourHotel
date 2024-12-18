@@ -16,8 +16,7 @@
             <RowDefinition Height="Auto"/>
             <!-- Высота кнопки -->
         </Grid.RowDefinitions>
-
-        <StackPanel Margin="10" Grid.Row="0">
+        <StackPanel Grid.Row="0" Margin="10" HorizontalAlignment="Center">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.25*"/>
@@ -66,7 +65,6 @@
             </Grid>
             <Separator Visibility="Hidden" Height="20"/>
         </StackPanel>
-
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Click="BackButton_Click" Margin="5">
                 <TextBlock Margin="5">Назад</TextBlock>

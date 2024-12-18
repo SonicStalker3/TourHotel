@@ -14,7 +14,16 @@ namespace Hotel
     
     public partial class Роли
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Роли()
+        {
+            this.Пользователи = new HashSet<Пользователи>();
+        }
+    
         public int RoleID { get; set; }
         public string Название { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Пользователи> Пользователи { get; set; }
     }
 }

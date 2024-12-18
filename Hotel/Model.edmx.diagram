@@ -4,29 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="896343ed931b445b8902bed99f00bdcb" Name="Diagram1">
-        <EntityTypeShape EntityType="HotelModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Заявки" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Клиенты" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Отель" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Отзывы" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Пользователи" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Роли" Width="1.5" PointX="5" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Страны" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.ТипыТуров" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Туры" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelModel.Туры_ТипыТуров" Width="1.5" PointX="10.5" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="HotelModel.FK__Заявки__ClientID__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Заявки__TourID__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Клиенты__UserID__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Отзывы__ClientID__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Отели__CountryID__29572725" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Отзывы__HotelID__4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK__Туры__HotelID__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_Туры_Страны" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_Туры_ТипыТуров" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_Туры_ТипыТуров_ТипыТуров" ManuallyRouted="false" />
-        <AssociationConnector Association="HotelModel.FK_Туры_ТипыТуров_Туры" ManuallyRouted="false" />
+      <Diagram DiagramId="fde7f6fb1e15485a93854fc1228047bb" Name="Diagram1">
+        <EntityTypeShape EntityType="Hotel_altModel.Заявки" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Клиенты" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Отель" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Отзывы" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Пользователи" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Роли" Width="1.5" PointX="1.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Страны" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.ТипыТуров" Width="1.5" PointX="2.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Hotel_altModel.Туры" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="Hotel_altModel.FK__Заявки__ClientID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Заявки__TourID__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Клиенты__UserID__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Отзывы__ClientID__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Отели__CountryID__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Отзывы__HotelID__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK__Туры__HotelID__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK_Пользователи_Роли" ManuallyRouted="false" />
+        <AssociationConnector Association="Hotel_altModel.FK_Туры_Страны" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,5 +1,4 @@
-﻿using Hotel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Hotel;
+using HotelApp;
 
 namespace HotelApp
 {
-    /// <summary>
-    /// Логика взаимодействия для Page1.xaml
-    /// </summary>
-    public partial class HotelPage : Page
+    public partial class TourPage : Page
     {
-        public HotelPage()
+        public TourPage()
         {
             InitializeComponent();
-            HotelEntities.GetContext().Отель.ToList();//.Include(o => o.Страны).ToList();
+            DGridHotel.ItemsSource = HotelEntities.GetContext().Туры.ToList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

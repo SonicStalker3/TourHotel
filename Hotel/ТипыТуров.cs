@@ -14,19 +14,7 @@ namespace Hotel
     
     public partial class ТипыТуров
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ТипыТуров()
-        {
-            this.Туры = new HashSet<Туры>();
-            this.Туры_ТипыТуров = new HashSet<Туры_ТипыТуров>();
-        }
-    
         public int TourTypeID { get; set; }
         public string Название { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Туры> Туры { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Туры_ТипыТуров> Туры_ТипыТуров { get; set; }
     }
 }

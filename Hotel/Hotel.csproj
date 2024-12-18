@@ -80,17 +80,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddEditHotelsPage.xaml.cs">
+    <Compile Include="Pages\AddEditHotelsPage.xaml.cs">
       <DependentUpon>AddEditHotelsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddEditTourPage.xaml.cs">
+    <Compile Include="Pages\AddEditTourPage.xaml.cs">
       <DependentUpon>AddEditTourPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BoolToYesNoConverter.cs" />
-    <Compile Include="HotelPage.xaml.cs">
+    <Compile Include="Converters\BoolToYesNoConverter.cs" />
+    <Compile Include="Controls\CheckedListBox.xaml.cs">
+      <DependentUpon>CheckedListBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditViewChoicePage.xaml.cs">
+      <DependentUpon>EditViewChoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HotelPage.xaml.cs">
       <DependentUpon>HotelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model.Context.cs">
@@ -108,7 +114,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NumericUpDown.xaml.cs">
+    <Compile Include="Controls\NumericUpDown.xaml.cs">
       <DependentUpon>NumericUpDown.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -116,10 +122,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+    <Compile Include="Pages\TourPage.xaml.cs">
+      <DependentUpon>TourPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToursViewPage.xaml.cs">
+    <Compile Include="Pages\ToursViewPage.xaml.cs">
       <DependentUpon>ToursViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Заявки.cs">
@@ -149,22 +155,27 @@
     <Compile Include="Туры.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Туры_ТипыТуров.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Page Include="AddEditHotelsPage.xaml">
+    <Page Include="Pages\AddEditHotelsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditTourPage.xaml">
+    <Page Include="Pages\AddEditTourPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HotelPage.xaml">
+    <Page Include="Controls\CheckedListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginPage.xaml">
+    <Page Include="Pages\EditViewChoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HotelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,11 +191,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NumericUpDown.xaml">
+    <Page Include="Controls\NumericUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ToursViewPage.xaml">
+    <Page Include="Pages\TourPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ToursViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,7 +252,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ErrorImage.jpg" />
+    <None Include="Resources\ErrorImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -248,7 +265,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\ErrorImage.jpg" />
+    <Resource Include="ErrorImage.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

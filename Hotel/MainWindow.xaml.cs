@@ -1,6 +1,6 @@
 ﻿
 using System.Windows;
-//using 
+using Hotel;
 
 namespace HotelApp
 {

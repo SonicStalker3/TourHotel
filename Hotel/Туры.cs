@@ -30,13 +30,10 @@ namespace Hotel
         public decimal Цена { get; set; }
         public Nullable<int> HotelID { get; set; }
         public Nullable<int> CountryID { get; set; }
-        public Nullable<int> TourTypesID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Заявки> Заявки { get; set; }
         public virtual Отель Отель { get; set; }
         public virtual Страны Страны { get; set; }
-        public virtual ТипыТуров ТипыТуров { get; set; }
-        public virtual Туры_ТипыТуров Туры_ТипыТуров { get; set; }
     }
 }
